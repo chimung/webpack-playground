@@ -1,3 +1,4 @@
+import './assets/scss/_bootstrap.scss';
 import { Liquid } from 'liquidjs';
 
 const engine = new Liquid({
@@ -5,9 +6,22 @@ const engine = new Liquid({
   extname: '.liquid', // used for layouts/includes, defaults ""
 });
 
-document.addEventListener('DOMContentLoaded', () => {
+const reloadTemplate = (engine, templateConfig) => {
   const container = document.querySelector('div');
   engine
-    .renderFile('test', { headerName: 'header2' }) // will read and render `views/hello.liquid`
-    .then((res) => (container.innerHTML = res)); // outputs "Alice"
+    .renderFile('main', templateConfig)
+    .then((res) => (container.innerHTML = res));
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  const headerSelector = document.querySelector('#headerSelector');
+  let templateConfig = {};
+  headerSelector.addEventListener('change', (e) => {
+    templateConfig = {
+      ...templateConfig,
+      headerName: e.target.value,
+    };
+
+    reloadTemplate(engine, templateConfig);
+  });
 });

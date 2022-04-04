@@ -1,5 +1,6 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'development',
@@ -15,6 +16,14 @@ module.exports = {
     compress: true,
     port: 9000,
   },
+  module: {
+    rules: [
+      {
+        test: /\.scss$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+      },
+    ],
+  },
   plugins: [
     new CopyPlugin({
       patterns: [
@@ -25,5 +34,6 @@ module.exports = {
         },
       ],
     }),
+    new MiniCssExtractPlugin(),
   ],
 };

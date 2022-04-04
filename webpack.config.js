@@ -32,6 +32,11 @@ module.exports = {
           to: 'views/[name][ext]',
           toType: 'template',
         },
+        {
+          from: 'src/index.html',
+          to: 'index.html',
+          toType: 'template',
+        },
       ],
     }),
     new MiniCssExtractPlugin(),

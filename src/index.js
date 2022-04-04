@@ -7,7 +7,7 @@ const engine = new Liquid({
 });
 
 const reloadTemplate = (engine, templateConfig) => {
-  const container = document.querySelector('div');
+  const container = document.querySelector('#container');
   engine
     .renderFile('main', templateConfig)
     .then((res) => (container.innerHTML = res));
